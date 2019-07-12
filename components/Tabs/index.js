@@ -31,6 +31,7 @@ tab.addEventListener('click', event => {
 
   return tab;
 }
-
+const cards = document.querySelectorAll('.card');
+console.log(cards);
 const tabs = document.querySelectorAll('.tab');
 console.log(tabs);
