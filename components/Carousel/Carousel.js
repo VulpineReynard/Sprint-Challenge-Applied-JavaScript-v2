@@ -17,3 +17,73 @@
     <div class="right-button"> > </div>
   </div>
 */
+const images = ["./assets/carousel/mountains.jpeg", "./assets/carousel/computer.jpeg", "./assets/carousel/trees.jpeg", "./assets/carousel/turntable.jpeg"];
+const carouselContainer = document.querySelector('.carousel-container');
+let index = 0;
+
+carouselContainer.appendChild(createCarousel(images));
+
+function createCarousel(arrayOfImages) {
+  const carousel = document.createElement('div');
+  const leftBtn = document.createElement('button');
+  const rightBtn = document.createElement('button');
+  carousel.appendChild(leftBtn);
+
+  arrayOfImages.forEach(imageSrc => {
+    const image = document.createElement('img');
+    image.src = imageSrc;
+    carousel.appendChild(image);
+  })
+  carousel.appendChild(rightBtn);
+
+  carousel.classList.add('carousel');
+  leftBtn.classList.add('left-button');
+  rightBtn.classList.add('right-button');
+
+  let images = carousel.querySelectorAll('img');
+  console.log(images);
+  images[0].style.display = 'block';
+
+  leftBtn.textContent = '<';
+  rightBtn.textContent = '>';
+  rightBtn.addEventListener('click', () => {
+    console.log(index)
+    if(index === images.length - 1) {
+        index = 0;
+        let currImg = images[index];
+
+        images.forEach(img => img.style.display = 'none');
+        currImg.style.display = 'block';
+        TweenMax.from(currImg, .5, {opacity: 0});
+        
+    } else {
+        index++;
+        let currImg = images[index];
+
+        images.forEach(img => img.style.display = 'none');
+        currImg.style.display = 'block';
+        TweenMax.from(currImg, .5, {opacity: 0});
+        console.log(index);
+    }
+  });
+  leftBtn.addEventListener('click', () => {
+    if(index === 0) {
+      index = 3;
+      let currImg = images[index];
+
+      images.forEach(img => img.style.display = 'none');
+      currImg.style.display = 'block';
+      TweenMax.from(currImg, .5, {opacity: 0});
+  } else {
+      index--;
+      let currImg = images[index];
+
+      images.forEach(img => img.style.display = 'none');
+      currImg.style.display = 'block';
+      TweenMax.from(currImg, .5, {opacity: 0});
+  }
+  });
+
+  return carousel;
+}
+
