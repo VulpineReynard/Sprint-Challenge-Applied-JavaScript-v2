@@ -8,9 +8,9 @@
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
 const topics = document.querySelector('.topics');
+
 axios.get('https://lambda-times-backend.herokuapp.com/topics')
   .then (data => {
-    console.log(data);
     data.data.topics.forEach(element => {
       topics.appendChild(newTab(element));
     });
@@ -24,5 +24,13 @@ function newTab(tabTopic) {
   tab.classList.add('tab');
   tab.textContent = tabTopic;
 
+tab.addEventListener('click', event => {
+  console.log(event.target);
+  event.target.classList.add('active-tab');
+})
+
   return tab;
 }
+
+const tabs = document.querySelectorAll('.tab');
+console.log(tabs);
